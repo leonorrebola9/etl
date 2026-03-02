@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 # 1️⃣ CONEXÃO SQL SERVER
 # =====================================================
 
-server = r'PC0ADRIANA\SQLEXPRESS'
+server = r'LAPTOP-VG0H1U7H\SQLEXPRESS'
 database = 'ShopX'
 
 connection_string = (

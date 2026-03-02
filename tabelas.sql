@@ -39,3 +39,63 @@ CREATE TABLE FactVendas (
     FOREIGN KEY (IDProdutoDW) REFERENCES DimProduto(IDProdutoDW),
     FOREIGN KEY (IDClienteDW) REFERENCES DimCliente(IDClienteDW)
 );
+
+SELECT 
+    dT.Ano, 
+    dT.Mes, 
+    dProd.Categoria,
+    SUM(fV.Quantidade) AS TotalQtd,
+    SUM(fV.Valor) AS TotalValor
+FROM FactVendas fV
+JOIN DimTempo dT ON fV.IDTempoDW = dT.IDTempoDW
+JOIN DimProduto dProd ON fV.IDProdutoDW = dProd.IDProduto
+GROUP BY 
+    dT.Ano, 
+    dT.Mes, 
+    dProd.Categoria
+ORDER BY 
+    dT.Ano, 
+    dT.Mes, 
+    dProd.Categoria;
+
+-- top 5 vendas
+SELECT TOP 5
+    dProd.NomeProduto,
+    SUM(fV.Valor) AS TotalVendido
+FROM FactVendas fV
+JOIN DimProduto dProd 
+    ON fV.IDProdutoDW = dProd.IDProduto
+GROUP BY dProd.NomeProduto
+ORDER BY TotalVendido DESC;
+
+-- distribuição geográfica
+SELECT
+    dC.Cidade,
+    SUM(fV.Valor) AS TotalVendas
+FROM FactVendas fV
+JOIN DimCliente dC 
+    ON fV.IDClienteDW = dC.IDCliente
+GROUP BY dC.Cidade
+ORDER BY TotalVendas DESC;
+
+-- evolução clientes
+WITH PrimeiraCompra AS (
+    SELECT
+        fV.IDClienteDW,
+        MIN(dT.Data) AS DataPrimeiraCompra
+    FROM FactVendas fV
+    JOIN DimTempo dT 
+        ON fV.IDTempoDW = dT.IDTempoDW
+    GROUP BY fV.IDClienteDW
+)
+
+SELECT
+    YEAR(DataPrimeiraCompra) AS Ano,
+    MONTH(DataPrimeiraCompra) AS Mes,
+    COUNT(IDClienteDW) AS NovosClientes
+FROM PrimeiraCompra
+GROUP BY 
+    YEAR(DataPrimeiraCompra),
+    MONTH(DataPrimeiraCompra)
+ORDER BY 
+    Ano, Mes;
