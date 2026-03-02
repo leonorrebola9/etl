@@ -1,14 +1,12 @@
 import pandas as pd
 
-clientes = pd.read_csv("clientes.csv")
+clientes = pd.read_csv("clientes.csv", encoding="cp1252", sep=";")
+produtos = pd.read_csv("produtos.csv", encoding="cp1252", sep=";")
+vendas = pd.read_csv("vendas.csv", encoding="cp1252", sep=";")
 
-produtos = pd.read_csv("produtos.csv")
-
-vendas = pd.read_csv("vendas.csv")
-
-# Converter data
-vendas["Data"] = pd.to_datetime(vendas["Data"])
-clientes["DataRegisto"] = pd.to_datetime(clientes["DataRegisto"], errors="coerce")
+# Converter datas (formato português)
+vendas["Data"] = pd.to_datetime(vendas["Data"], dayfirst=True)
+clientes["DataRegisto"] = pd.to_datetime(clientes["DataRegisto"], dayfirst=True, errors="coerce")
 
 # Remover duplicados
 clientes = clientes.drop_duplicates()
@@ -19,7 +17,6 @@ vendas = vendas.drop_duplicates()
 clientes = clientes.fillna("Desconhecido")
 produtos = produtos.fillna("Desconhecido")
 vendas = vendas.dropna() 
-
 
 # Criar dimensão tempo
 dim_tempo = vendas[["Data"]].drop_duplicates()

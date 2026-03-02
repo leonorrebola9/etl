@@ -1,0 +1,31 @@
+IDCliente;Nome;Morada;Cidade;Pais;Email;DataRegisto
+1;João Silva;Rua das Flores 21;Lisboa;Portugal;joao.silva@example.com;15/01/2021
+2;Maria Santos;Avenida Central 10;Porto;Portugal;maria.santos@example.com;02/03/2021
+3;Carlos Sousa;Rua do Mercado 55;Braga;Portugal;carlos.sousa@example.com;18/05/2021
+4;Ana Pereira;Rua Nova 12;Coimbra;Portugal;ana.pereira@example.com;11/01/2022
+5;Luís Almeida;Travessa das Colinas 9;Lisboa;Portugal;luis.almeida@example.com;25/07/2021
+6;Pedro Costa;Rua do Sol 47;Faro;Portugal;pedro.costa@example.com;10/02/2022
+7;Sara Correia;Largo do Carmo 7;Lisboa;Portugal;sara.correia@example.com;30/08/2021
+8;Beatriz Lopes;Alameda das Estrelas 3;Porto;Portugal;beatriz.lopes@example.com;01/12/2021
+9;Rui Tavares;Rua do Limoeiro 11;Braga;Portugal;rui.tavares@example.com;15/03/2022
+10;Diana Fonseca;Estrada da Serra 99;Guimarães;Portugal;diana.fonseca@example.com;22/05/2022
+11;Mariana Ferreira;Calçada do Pico 14;Lisboa;Portugal;mariana.ferreira@example.com;05/06/2022
+12;Bruno Carvalho;Travessa dos Anjos 6;Porto;Portugal;bruno.carvalho@example.com;10/10/2021
+13;Paula Figueiredo;Rua das Oliveiras 25;Aveiro;Portugal;paula.figueiredo@example.com;09/09/2021
+14;David Monteiro;Rua da Estação 88;Faro;Portugal;david.monteiro@example.com;11/11/2022
+15;Marta Gomes;Beco do Jardim 2;Coimbra;Portugal;marta.gomes@example.com;04/04/2021
+16;Fernando Rocha;Praça do Comércio 4;Lisboa;Portugal;fernando.rocha@example.com;10/01/2023
+17;Vera Cruz;Rua das Palmeiras 70;Porto;Portugal;vera.cruz@example.com;14/02/2023
+18;Tiago Martins;Rua de Santiago 77;Braga;Portugal;tiago.martins@example.com;25/04/2022
+19;Filipa Nogueira;Avenida do Mar 22;Funchal;Portugal;filipa.nogueira@example.com;09/09/2022
+20;Eduardo Reis;Rua Principal 10;Leiria;Portugal;eduardo.reis@example.com;03/03/2023
+21;Carolina Teixeira;Rua do Castelo 21;Viseu;Portugal;carolina.teixeira@example.com;20/02/2022
+22;Gonçalo Mendes;Av. Dr. Alves 15;Setúbal;Portugal;goncalo.mendes@example.com;15/07/2022
+23;Sandra Moura;Rua da Esperança 4;Évora;Portugal;sandra.moura@example.com;20/12/2021
+24;Nelson Vieira;Rua dos Pinheiros 98;Funchal;Portugal;nelson.vieira@example.com;01/11/2021
+25;Rita Carvalho;Rua dos Navegantes 33;Santarém;Portugal;rita.carvalho@example.com;10/08/2022
+26;Inês Salgado;Rua do Horizonte 6;Porto;Portugal;ines.salgado@example.com;01/07/2021
+27;André Pires;Estrada do Lago 17;Braga;Portugal;andre.pires@example.com;09/05/2023
+28;Susana Batista;Rua da Praia 14;Aveiro;Portugal;susana.batista@example.com;14/04/2023
+29;Cátia Ramos;Beco da Torre 2;Lisboa;Portugal;catia.ramos@example.com;29/03/2022
+30;Hugo Moura;Rua do Estádio 31;Porto;Portugal;hugo.moura@example.com;01/10/2022
