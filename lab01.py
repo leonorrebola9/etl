@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 from sqlalchemy import create_engine
 
-server = r'LAPTOP-VG0H1U7H\SQLEXPRESS'   # <-- substitui pelo teu
+server = r'PC0ADRIANA\SQLEXPRESS'   # <-- substitui pelo teu
 database = 'ShopX'
 
 connection_string = (
@@ -77,15 +77,16 @@ print("Tabelas recriadas com sucesso!")
 # 3️⃣ LER FICHEIROS CSV
 # ==============================
 
-clientes = pd.read_csv("clientes.csv", encoding="latin-1")
-produtos = pd.read_csv("produtos.csv", encoding="latin-1")
-vendas = pd.read_csv("vendas.csv", encoding="latin-1")
+clientes = pd.read_csv("clientes.csv", sep=";", encoding="latin-1")
+produtos = pd.read_csv("produtos.csv", sep=";", encoding="latin-1")
+vendas = pd.read_csv("vendas.csv", sep=";", encoding="latin-1")
 
 # ==============================
 # 4️⃣ CRIAR DIMENSÃO TEMPO
 # ==============================
 
-vendas['Data'] = pd.to_datetime(vendas['Data'])
+print(vendas.columns)
+vendas['Data'] = pd.to_datetime(vendas['Data'], dayfirst=True)
 
 DimTempo = vendas[['Data']].drop_duplicates().copy()
 DimTempo['Ano'] = DimTempo['Data'].dt.year
@@ -94,6 +95,7 @@ DimTempo['Dia'] = DimTempo['Data'].dt.day
 DimTempo['DataID'] = DimTempo['Data'].dt.strftime('%Y%m%d').astype(int)
 
 DimTempo = DimTempo[['DataID', 'Data', 'Ano', 'Mes', 'Dia']]
+
 
 # ==============================
 # 5️⃣ PREPARAR DIMENSÕES
