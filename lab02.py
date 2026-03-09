@@ -18,7 +18,7 @@ start_url = "https://en.wikipedia.org/wiki/Web_scraping"
 visited = set()
 queue = [start_url]
 
-with open("wikipedia_dataset1.csv", "w", newline="", encoding="utf-8") as f:
+with open("wikipedia_dataset.csv", "w", newline="", encoding="utf-8") as f:
 
     writer = csv.writer(f)
     writer.writerow(["url", "title", "text", "links", "images"])
@@ -85,7 +85,7 @@ with open("wikipedia_dataset1.csv", "w", newline="", encoding="utf-8") as f:
                 ";".join(set(links)),
                 ";".join(set(images))
             ])
-
+        #erro ao processar o HTML, como falta de tags ou estrutura inesperada
         except Exception as e:
             logging.error(f"Erro ao processar HTML em {url}: {e}")
             print("Erro ao extrair dados:", url)
