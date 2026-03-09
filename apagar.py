@@ -8,6 +8,7 @@ df = pd.read_csv(
 )
 
 df = df.drop_duplicates()
+#rawr
 
 print(df.columns)
 
