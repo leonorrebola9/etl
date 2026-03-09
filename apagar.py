@@ -7,8 +7,9 @@ df = pd.read_csv(
     on_bad_lines="skip"
 )
 
-print(df.columns)
+df = df.drop_duplicates()
 
+print(df.columns)
 
 colunas_limpar = ["title", "text"]
 
