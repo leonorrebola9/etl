@@ -22,6 +22,7 @@ def normalizar_numero(valor):
     if valor == "":
         return None
 
+    # Converter número europeu para float
     valor = valor.replace(".", "")
     valor = valor.replace(",", ".")
 
@@ -33,15 +34,14 @@ def normalizar_numero(valor):
 
 def normalizar_inteiro(valor):
     valor = valor.strip()
-
     if valor.isdigit():
         return int(valor)
-
     return None
 
 
 with open(input_file, "r", encoding="latin-1") as f, open(log_file, "w", encoding="utf-8") as log:
 
+    # Usar DictReader ou csv.reader com aspas
     for numero_linha, linha in enumerate(f, start=1):
 
         linha = linha.strip()
@@ -53,7 +53,8 @@ with open(input_file, "r", encoding="latin-1") as f, open(log_file, "w", encodin
             delimitador = ","
 
         try:
-            reader = csv.reader([linha], delimiter=delimitador)
+            # Usar csv.reader corretamente para lidar com aspas
+            reader = csv.reader([linha], delimiter=delimitador, quotechar='"')
             campos = next(reader)
 
             if len(campos) != colunas_esperadas:
@@ -68,7 +69,7 @@ with open(input_file, "r", encoding="latin-1") as f, open(log_file, "w", encodin
             idade = normalizar_inteiro(campos[2])
             salario = normalizar_numero(campos[3])
 
-            # guardar valores válidos
+            # Guardar valores válidos
             if idade is not None and idade > 0:
                 idades_validas.append(idade)
 
@@ -81,24 +82,22 @@ with open(input_file, "r", encoding="latin-1") as f, open(log_file, "w", encodin
             log.write(f"Linha {numero_linha}: erro de parsing -> {linha}\n")
 
 
-# calcular médias
+# Calcular médias
 media_idade = sum(idades_validas) / len(idades_validas) if idades_validas else 0
 media_salario = sum(salarios_validos) / len(salarios_validos) if salarios_validos else 0
 
 
-# substituir valores inválidos
+# Substituir valores inválidos
 for linha in dados_limpos:
-
     if linha[2] is None or linha[2] <= 0:
         linha[2] = round(media_idade)
-
     if linha[3] is None or linha[3] <= 0:
         linha[3] = round(media_salario, 2)
 
 
 # Guardar CSV limpo
 with open(output_file, "w", newline="", encoding="utf-8") as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
     writer.writerow(["ID", "Nome", "Idade", "Salario"])
     writer.writerows(dados_limpos)
 

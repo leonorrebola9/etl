@@ -1,12 +1,12 @@
-ID;Nome;Idade;Salario
-id;nome;30;8787.09
-1;Ana, Silva;30;15000.0
-2;Pedro;25;8787.09
-3;Carla, 'Cac·';28;20005.0
-4;Rui;30;1200.2
-5;Marcia;40;21004.0
-6;AndrÈ, Teste;30;8787.09
-7;Rodrigo, P;30;8787.09
-8;Silvia, Maria;29;1300.45
-9;N/A;30;2000.0
-10;Luis, P;25;1000.0
+ID,Nome,Idade,Salario
+id,nome,30,8787.09
+1,"Ana, Silva",30,15000.0
+2,Pedro,25,8787.09
+3,"Carla, 'Cac√°'",28,20005.0
+4,Rui,30,1200.2
+5,Marcia,40,21004.0
+6,"Andr√©, Teste",30,8787.09
+7,"Rodrigo, P",30,8787.09
+8,"Silvia, Maria",29,1300.45
+9,N/A,30,2000.0
+10,"Luis, P",25,1000.0
