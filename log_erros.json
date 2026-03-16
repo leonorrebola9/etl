@@ -1,0 +1,10 @@
+[
+  {
+    "produto": {
+      "nome": "Casaco Inverno",
+      "categoria": "Vestuário",
+      "preco": 89.9
+    },
+    "erro": "campo obrigatório em falta"
+  }
+]
