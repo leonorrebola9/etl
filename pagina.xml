@@ -1,0 +1,21 @@
+<root>
+  <pessoa>
+    <nome>Ana Pereira</nome>
+    <idade>30
+  <!-- Falta aqui fechar a tag <idade> e <pessoa> -->
+  
+  <pessoa>
+    <nome>Bruno Costa</nome>
+    <idade>25</idade>
+  </pessoa>
+  <pessoa>
+    <nome>Carla</nome>
+    <id>3</id>
+    <!-- "id" em vez de <idade>? -->
+  </pessoa>
+  <pessoa>
+    <nome>Diogo Silva</nome>
+    <idade>40</idade>
+    <comentario>Tag sem fecho
+  </pessoa>
+</root>
