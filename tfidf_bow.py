@@ -47,3 +47,11 @@ def tfidf_bow():
 
 if __name__ == "__main__":
     tfidf_bow()
+
+'''
+BoW vocab: 4941
+BoW shape: (1500, 4941)
+TF-IDF shape: (1500, 4941)
+Accuracy: 0.7167
+F1: 0.7165
+'''
