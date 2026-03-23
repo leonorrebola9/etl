@@ -9,51 +9,56 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.linear_model import LogisticRegression
 
 
+def bert():
+    df = main()
 
-df = main()
+    print("\nA gerar embeddings com BERT...")
 
-print("\nA gerar embeddings com BERT...")
+    model_name = "neuralmind/bert-base-portuguese-cased"
 
-model_name = "neuralmind/bert-base-portuguese-cased"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    bert_model = AutoModel.from_pretrained(model_name)
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-bert_model = AutoModel.from_pretrained(model_name)
+    def bert_embedding(text):
 
-def bert_embedding(text):
+        inputs = tokenizer(
+            text,
+            return_tensors="pt",
+            truncation=True,
+            padding=True,
+            max_length=128
+        )
 
-    inputs = tokenizer(
-        text,
-        return_tensors="pt",
-        truncation=True,
-        padding=True,
-        max_length=128
-    )
+        with torch.no_grad():
+            outputs = bert_model(**inputs)
 
-    with torch.no_grad():
-        outputs = bert_model(**inputs)
+        embedding = outputs.last_hidden_state[:,0,:]
 
-    embedding = outputs.last_hidden_state[:,0,:]
-
-    return embedding.squeeze().numpy()
-
-
-df["bert_vector"] = df["tweet"].apply(bert_embedding)
+        return embedding.squeeze().numpy()
 
 
-X_bert = np.vstack(df["bert_vector"].values)
+    df["bert_vector"] = df["tweet"].apply(bert_embedding)
 
-    # dividir dados
-X_train, X_test, y_train, y_test = train_test_split(
-    X_bert, df["sentiment"], test_size=0.2, random_state=42
-    )
 
-# modelo simples de classificação
-clf = LogisticRegression(max_iter=1000)
+    X_bert = np.vstack(df["bert_vector"].values)
 
-clf.fit(X_train, y_train)
+        # dividir dados
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_bert, df["sentiment"], test_size=0.2, random_state=42
+        )
 
-y_pred = clf.predict(X_test)
+    # modelo simples de classificação
+    clf = LogisticRegression(max_iter=1000)
 
-print("\nResultados BERT")
-print("Accuracy:", accuracy_score(y_test, y_pred))
-print("F1:", f1_score(y_test, y_pred, average="weighted"))
+    clf.fit(X_train, y_train)
+
+    y_pred = clf.predict(X_test)
+
+    bert_acc = accuracy_score(y_test, y_pred)
+    bert_f1 = f1_score(y_test, y_pred, average="weighted")
+
+    print("\nResultados BERT")
+    print("Accuracy:", bert_acc)
+    print("F1:", bert_f1)
+
+    return bert_acc, bert_f1
