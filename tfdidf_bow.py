@@ -10,6 +10,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, f1_score
 
+
 def main():
     nltk.download('punkt')
     nltk.download('stopwords')
@@ -25,13 +26,16 @@ def main():
         tokens = [t for t in tokens if t not in stop_words]
         return tokens
 
-    # aplicar preprocessing
     df["tokens"] = df["tweet"].apply(preprocessar)
-
     df["texto_limpo"] = df["tokens"].apply(lambda x: " ".join(x))
 
+    return df   # ← devolve o dataframe
+
+
+if __name__ == "__main__":
+    df = main()   # ← agora df existe aqui
+
     # Bag of Words
-    # BoW vocab: 4941; BoW shape: (1500, 4941)
     vectorizer_bow = CountVectorizer()
     X_bow = vectorizer_bow.fit_transform(df["texto_limpo"])
 
@@ -39,16 +43,17 @@ def main():
     print("BoW shape:", X_bow.shape)
 
     # TF-IDF
-    # TF-IDF shape: (1500, 4941)
     vectorizer_tfidf = TfidfVectorizer()
     X_tfidf = vectorizer_tfidf.fit_transform(df["texto_limpo"])
 
     print("TF-IDF shape:", X_tfidf.shape)
 
+    # Train-test split
     X_train, X_test, y_train, y_test = train_test_split(
         df["texto_limpo"], df["sentiment"], test_size=0.2, random_state=42
     )
 
+    # Pipeline com TF-IDF + Naive Bayes
     model = Pipeline([
         ("vectorizer", TfidfVectorizer()),
         ("classifier", MultinomialNB())
@@ -57,9 +62,6 @@ def main():
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
 
-    print("Accuracy:", accuracy_score(y_test, y_pred))
-    print("F1:", f1_score(y_test, y_pred, average="weighted"))
-
-
-if __name__ == "__main__":
-    main()
+    # Métricas formatadas
+    print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+    print(f"F1: {f1_score(y_test, y_pred, average='weighted'):.4f}")
