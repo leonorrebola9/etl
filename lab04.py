@@ -4,22 +4,23 @@ import string
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-# downloads necessários
-nltk.download('punkt')
-nltk.download('punkt_tab')
-nltk.download('stopwords')
+def main():
+    # downloads necessários
+    nltk.download('punkt')
+    nltk.download('punkt_tab')
+    nltk.download('stopwords')
 
-df = pd.read_csv("tweet_sub.csv")
+    df = pd.read_csv("tweet_sub.csv")
 
-stop_words = set(stopwords.words('portuguese'))
+    stop_words = set(stopwords.words('portuguese'))
 
-def preprocessar(texto):
-    texto = texto.lower()
-    texto = texto.translate(str.maketrans('', '', string.punctuation))
-    tokens = word_tokenize(texto)
-    tokens = [t for t in tokens if t not in stop_words]
-    return tokens
+    def preprocessar(texto):
+        texto = texto.lower()
+        texto = texto.translate(str.maketrans('', '', string.punctuation))
+        tokens = word_tokenize(texto)
+        tokens = [t for t in tokens if t not in stop_words]
+        return tokens
 
-df["tokens"] = df["tweet"].apply(preprocessar)
+    df["tokens"] = df["tweet"].apply(preprocessar)
 
-print(df)
+    return df
