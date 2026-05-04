@@ -17,5 +17,3 @@ CREATE TABLE Titulos (
     atualizado_em DATETIME       NOT NULL DEFAULT GETDATE()
 );
 GO
-
-select * from Titulos;
